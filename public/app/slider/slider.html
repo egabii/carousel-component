@@ -1,0 +1,18 @@
+<div class="slider-component">
+	<div class="slider-wrapper">
+		<div class="slider-box">
+			<div class="item one-col" slide-index="{{$index}}" ng-repeat="item in items" 
+				 ng-class="{'active': $first}">
+				<h3>{{item.title}}</h3>
+				<p>{{item.body}}</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="slider-controls">
+		<a href="#" class="btn arrow slide-prev rounded" 
+		   role="button" ng-click="$prev()"></a>
+		<a href="#" class="btn arrow slide-next rounded" 
+		   role="button" ng-click="$next()"></a>
+	</div>
+</div>

@@ -1,0 +1,69 @@
+.slider-component {
+	width: 600px;
+	margin: 0 auto;
+	position: relative;
+}
+.slider-wrapper {
+	max-width: 100%;
+    overflow: hidden;
+}
+
+.slider-box {
+	margin: 20px auto;
+	width: 1378%;
+	height: 220px;
+	overflow: hidden;
+}
+.item {
+	width: 600px;
+	height: 120px;
+	float: left;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+    padding: 0px 30px;
+    position: relative;
+}
+.slider-component .slider-controls .btn {
+    border: 1px solid #000;
+}
+.slider-component .slider-controls .arrow.rounded {
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+}
+.slider-component .slider-controls .arrow {
+	text-decoration: none;
+    position: absolute;
+    top: 100px;
+    font-size: 24px;
+    color: #fff;
+    display: block;
+    background: #000;
+}
+.slider-controls .slide-next::before, 
+.slider-controls .slide-prev::before {
+	position: relative;
+	top: 2.5px;
+	display: block;
+}
+.slider-controls .slide-prev::before {
+	content:"\25C0";
+    left: 5px;
+
+}
+.slider-controls .slide-next::before {
+	content: "\25B6";
+    left: 10px;
+}
+.slider-controls .slide-prev {
+	left: -40px;
+}
+.slider-controls .slide-next {
+	right: -40px;
+}
+
+.slider-controls .btn[disabled], .slider-controls .btn.disabled {
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(0, 0, 0, 0.25);
+ 	pointer-events: none;
+}
