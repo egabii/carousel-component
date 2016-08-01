@@ -1,10 +1,11 @@
 .slider-component {
-	width: 600px;
+	width: 700px;
 	margin: 0 auto;
 	position: relative;
+	padding: 0 4%;
 }
 .slider-wrapper {
-	max-width: 100%;
+	width: 100%;
     overflow: hidden;
 }
 
@@ -14,24 +15,24 @@
 	height: 220px;
 	overflow: hidden;
 }
-.item {
-	width: 600px;
-	height: 120px;
+.slide {
+	width: 700px;
+	height: 190px;
 	float: left;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-    padding: 0px 30px;
+    padding: 0px 53px;
     position: relative;
+}
+
+/* SLIDER/CAROUSEL BUTTON */
+.slider-component .slider-controls .btn:focus,
+.slider-component .slider-controls .btn:hover {
+	outline: 0;
+	box-shadow: 0 0 5px 4px #9673DA;
 }
 .slider-component .slider-controls .btn {
     border: 1px solid #000;
-}
-.slider-component .slider-controls .arrow.rounded {
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
-}
-.slider-component .slider-controls .arrow {
 	text-decoration: none;
     position: absolute;
     top: 100px;
@@ -40,30 +41,46 @@
     display: block;
     background: #000;
 }
+.slider-component .slider-controls .arrow.rounded {
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+}
 .slider-controls .slide-next::before, 
 .slider-controls .slide-prev::before {
 	position: relative;
 	top: 2.5px;
 	display: block;
 }
-.slider-controls .slide-prev::before {
+.slider-controls .slide-prev.arrow::before {
 	content:"\25C0";
     left: 5px;
 
 }
-.slider-controls .slide-next::before {
+.slider-controls .slide-next.arrow::before {
 	content: "\25B6";
     left: 10px;
 }
-.slider-controls .slide-prev {
-	left: -40px;
+.slider-controls .slide-prev {	
+	left: 0;
 }
 .slider-controls .slide-next {
-	right: -40px;
+	right: 0;
 }
-
 .slider-controls .btn[disabled], .slider-controls .btn.disabled {
     background: rgba(0, 0, 0, 0.25);
     border: 1px solid rgba(0, 0, 0, 0.25);
  	pointer-events: none;
+}
+.slider-controls .btn[disabled]:focus, .slider-controls .btn.disabled:focus {
+	box-shadow: 0 0 5px 4px transparent;
+}
+
+/* initialize track */
+.slider-track {
+	-webkit-transform: translate(0,0);
+	transform: translate(0,0);
+	-webkit-transition: 1s ease-in-out;
+	-o-transition: 1s ease-in-out;
+	transition: 1s ease-in-out;
 }

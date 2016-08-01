@@ -1,18 +1,19 @@
 <div class="slider-component">
 	<div class="slider-wrapper">
 		<div class="slider-box">
-			<div class="item one-col" slide-index="{{$index}}" ng-repeat="item in items" 
-				 ng-class="{'active': $first}">
-				<h3>{{item.title}}</h3>
-				<p>{{item.body}}</p>
+			<div class="slider-track">
+				<div class="slide" slide-index="{{$index}}" ng-repeat="item in items" ng-class="{'current first': $first, 'last':$last}">
+					<h3>{{item.title}}</h3>
+					<p>{{item.body}}</p>
+				</div>
 			</div>
 		</div>
 	</div>
 
 	<div class="slider-controls">
 		<a href="#" class="btn arrow slide-prev rounded" 
-		   role="button" ng-click="$prev()"></a>
+		   role="button" ng-click="$prev()" tabindex="2"></a>
 		<a href="#" class="btn arrow slide-next rounded" 
-		   role="button" ng-click="$next()"></a>
+		   role="button" ng-click="$next()" tabindex="1"></a>
 	</div>
 </div>
