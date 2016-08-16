@@ -4,7 +4,10 @@
   "description": "asdsaada",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server.js",
+    "mv:angular": "mkdir public/vendor/angular && mv node_modules/angular-* public/vendor/angular/",
+    "mv:jquery": "mkdir public/vendor/jquery && mv node_modules/jquery public/vendor/jquery/",
+    "postinstall": "mv:angular && mv:jquery"
   },
   "keywords": [],
   "author": "",
