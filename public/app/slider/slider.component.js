@@ -1,61 +1,16 @@
-(function(ng){
+(function(ng, window){
 	var slider = ng.module('slider-component',[]);
 
 
 	var SliderCompiler = function(elem, attrs) {
 		var	width = parseInt($('.slide').css('width'))
 			counter = 0;
+			console.log(elem);
 		return {
 			// POSTLINK
 			post: function(scope, elem, attrs, ctrl) {
-				scope.items = [
-					{
-						title: 'SLIDE 1',
-						body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit nam, vero iure nulla, dolores possimus ex, voluptatem pariatur tenetur beatae odio nisi nihil voluptas. Laudantium quaerat error, numquam nostrum nulla?'
-					},
-					{
-						title: 'SLIDE 2',
-						body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit nam, vero iure nulla, dolores possimus ex, voluptatem pariatur tenetur beatae odio nisi nihil voluptas. Laudantium quaerat error, numquam nostrum nulla?'
-					},
-					{
-						title: 'SLIDE 3',
-						body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit nam, vero iure nulla, dolores possimus ex, voluptatem pariatur tenetur beatae odio nisi nihil voluptas. Laudantium quaerat error, numquam nostrum nulla?'
-					},
-					{
-						title: 'SLIDE 4',
-						body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit nam, vero iure nulla, dolores possimus ex, voluptatem pariatur tenetur beatae odio nisi nihil voluptas. Laudantium quaerat error, numquam nostrum nulla?'
-					},
-					{
-						title: 'SLIDE 5',
-						body: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit nam, vero iure nulla, dolores possimus ex, voluptatem pariatur tenetur beatae odio nisi nihil voluptas. Laudantium quaerat error, numquam nostrum nulla?'
-					}
-				];
-				
-
-				scope.$next = function() {
-					counter -= width;
-					
-					if( _isLastOne() ) {
-						elem.find('.slide-next').attr('disabled', true);
-					}else{
-						_move(counter);
-						$('.current').removeClass('current').next().first().addClass('current');
-					}
-				}
-				
-				scope.$prev = function () {
-					counter += width;
-					if( _isfirstOne() ){
-						elem.find('.slide-prev').attr('disabled', true);
-					} else {
-						_move(counter);
-						$('.current').removeClass('current').prev().addClass('current');
-					}
-
-				}
-
 				function _isfirstOne() {
-					return $('.first').hasClass('current');
+					return elem.find('.first').hasClass('current'); // bool
 				}
 
 				function _move(x) {
@@ -64,28 +19,51 @@
 					})
 				}
 
-				function _reset() {
-					_move(0);
-				}
-
 				function _isLastOne() {
-					return $('.last').hasClass('current');
+					return elem.find('.last').hasClass('current'); // bool
 				}
 
+				scope.$watch(function(newVal, oldVal){
+					if( _isfirstOne ){
+						console.log('_isfirstOne',newVal, oldVal);
+						elem.find('.slide-prev').attr('disabled', true);
+						elem.find('.slide-next').attr('disabled', false);
+					} else if( _isLastOne ){
+						console.log('_isLastOne');
+						elem.find('.slide-prev').attr('disabled', false);
+						elem.find('.slide-next').attr('disabled', true);
+					}
+				});
+
+				scope.$next = function() {
+					counter -= width;
+					_move(counter);
+					$('.current').removeClass('current').next().first().addClass('current');
+				}
+				
+				scope.$prev = function () {
+					counter += width;
+					_move(counter);
+					$('.current').removeClass('current').prev().addClass('current');
+				}
 			}
 		}
 	}
 
-
 	var SliderDirective = function() {
 		// Runs during compile
 		return {
-			scope: {},
+			scope: {
+				// Best Practice: Use the scope option to create isolate scopes 
+				// when making components that you want to reuse throughout your app.
+				slides: '='
+			},
 			restrict: 'E',
 			templateUrl: 'app/slider/slider.html',
 			compile: SliderCompiler
 		};
 	}
 
+	SliderDirective.$inject = ['$rootScope'];
 	slider.directive('slider', SliderDirective);
-})(angular)
+})(angular, window)

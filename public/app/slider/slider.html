@@ -1,8 +1,13 @@
+<!-- 
+	<slider 
+		[attributes]>
+	</slider>
+ -->
 <div class="slider-component">
 	<div class="slider-wrapper">
 		<div class="slider-box">
 			<div class="slider-track">
-				<div class="slide" slide-index="{{$index}}" ng-repeat="item in items" ng-class="{'current first': $first, 'last':$last}">
+				<div class="slide" slide-index="{{$index}}"  ng-repeat="item in slides" ng-class="{'current first': $first, 'last':$last}">
 					<h3>{{item.title}}</h3>
 					<p>{{item.body}}</p>
 				</div>
